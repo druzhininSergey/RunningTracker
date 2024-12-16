@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.runique.android.application.compose)
-    alias(libs.plugins.runique.jvm.ktor)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
 android {

@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.runique.android.library)
-    alias(libs.plugins.runique.android.room)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
 android {

@@ -41,13 +41,13 @@ health = "1.0.0-rc02"
 play-services-wearable = "19.0.0"
 wear = "1.3.0"
 
-# Project versions
-projectApplicationId = "com.dsergei.runningtracker"
-projectVersionName = "1.0"
-projectMinSdkVersion = "25"
-projectTargetSdkVersion = "35"
-projectCompileSdkVersion = "35"
-projectVersionCode = "1"
+## Project versions
+#projectApplicationId = "com.dsergei.runningtracker"
+#projectVersionName = "1.0"
+#projectMinSdkVersion = "25"
+#projectTargetSdkVersion = "35"
+#projectCompileSdkVersion = "35"
+#projectVersionCode = "1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -125,17 +125,6 @@ org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org
 androidDynamicFeature = { id = "com.android.dynamic-feature", version.ref = "agp" }
 mapsplatform-secrets-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsPlugin"}
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-
-runique-android-application = { id = "runique.android.application", version = "unspecified" }
-runique-android-application-compose = { id = "runique.android.application.compose", version = "unspecified" }
-runique-android-library = { id = "runique.android.library", version = "unspecified" }
-runique-android-library-compose = { id = "runique.android.library.compose", version = "unspecified" }
-runique-android-feature-ui = { id = "runique.android.feature.ui", version = "unspecified" }
-runique-android-room = { id = "runique.android.room", version = "unspecified" }
-runique-android-dynamic-feature = { id = "runique.android.dynamic.feature", version = "unspecified" }
-runique-jvm-library = { id = "runique.jvm.library", version = "unspecified" }
-runique-jvm-ktor = { id = "runique.jvm.ktor", version = "unspecified" }
-runique-android-application-wear-compose = { id = "runique.android.application.wear.compose", version = "unspecified" }
 
 [bundles]
 compose = [

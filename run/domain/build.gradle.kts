@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.runique.jvm.library)
+    alias(libs.plugins.org.jetbrains.kotlin.jvm)
 }
 
 java {

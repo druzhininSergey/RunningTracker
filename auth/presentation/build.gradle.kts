@@ -1,5 +1,6 @@
 plugins {
-    alias(libs.plugins.runique.android.feature.ui)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
 android {
