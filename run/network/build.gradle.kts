@@ -34,6 +34,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.domain)
+    implementation(projects.core.data)
+
     implementation(libs.bundles.koin)
 
     testImplementation(libs.junit)
