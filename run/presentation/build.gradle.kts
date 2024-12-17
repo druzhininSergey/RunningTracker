@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.compose.compiler)
 }
 
 
@@ -38,6 +39,7 @@ dependencies {
     implementation(libs.google.maps.android.compose)
     implementation(libs.androidx.activity.compose)
     implementation(libs.timber)
+    implementation(platform(libs.androidx.compose.bom))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

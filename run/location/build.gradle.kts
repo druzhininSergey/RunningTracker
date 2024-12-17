@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.compose.compiler)
 }
 
 
@@ -39,6 +40,7 @@ dependencies {
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.google.android.gms.play.services.location)
+    implementation(platform(libs.androidx.compose.bom))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -81,4 +81,6 @@ dependencies {
 
     // Timber
     implementation(libs.timber)
+
+    implementation(platform(libs.androidx.compose.bom))
 }

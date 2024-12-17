@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -38,6 +39,7 @@ dependencies {
     implementation(libs.androidx.work)
     implementation(libs.koin.android.workmanager)
     implementation(libs.kotlinx.serialization.json)
+    implementation(platform(libs.androidx.compose.bom))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
