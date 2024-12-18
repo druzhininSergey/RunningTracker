@@ -128,6 +128,7 @@ mapsplatform-secrets-plugin = { id = "com.google.android.libraries.mapsplatform.
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 runningtracker-android-application = { id = "runningtracker.android.application", version = "unspecified" }
+runningtracker-android-application-compose = { id = "runningtracker.android.application.compose", version = "unspecified" }
 
 [bundles]
 compose = [
