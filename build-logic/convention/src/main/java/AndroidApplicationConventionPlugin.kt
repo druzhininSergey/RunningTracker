@@ -29,7 +29,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     extensionType = ExtensionType.APPLICATION
                 )
             }
-
         }
     }
 }

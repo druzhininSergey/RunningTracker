@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.runningtracker.android.application)
+    alias(libs.plugins.runningtracker.android.application.compose)
+    alias(libs.plugins.mapsplatform.secrets.plugin)
 }
 
 android {
@@ -10,9 +10,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
