@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.runningtracker.android.library)
+    alias(libs.plugins.runningtracker.jvm.ktor)
 }
 
 android {
@@ -7,13 +8,13 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.domain)
-    implementation(projects.core.database)
     implementation(libs.timber)
-    implementation(libs.bundles.koin)
 
-    testImplementation(libs.junit)
+     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
+    implementation(projects.core.domain)
+    implementation(projects.core.database)
 }

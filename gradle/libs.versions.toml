@@ -134,6 +134,7 @@ runningtracker-android-library-compose = { id = "runningtracker.android.library.
 runningtracker-android-feature-ui = { id = "runningtracker.android.feature.ui", version = "unspecified" }
 runningtracker-android-room = { id = "runningtracker.android.room", version = "unspecified" }
 runningtracker-jvm-library = { id = "runningtracker.jvm.library", version = "unspecified" }
+runningtracker-jvm-ktor = { id = "runningtracker.jvm.ktor", version = "unspecified" }
 
 [bundles]
 compose = [
