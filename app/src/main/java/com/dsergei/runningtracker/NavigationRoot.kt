@@ -1,15 +1,13 @@
 package com.dsergei.runningtracker
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.dsergei.auth.presentation.intro.IntroScreenRoot
+import com.dsergei.auth.presentation.login.LoginScreenRoot
 import com.dsergei.auth.presentation.register.RegisterScreenRoot
 
 @Composable
@@ -57,9 +55,24 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
             )
         }
         composable<Routes.Login> {
-            Box(contentAlignment = Alignment.Center) {
-                Text("LOGIN")
-            }
+            LoginScreenRoot(
+                onLoginSuccess = {
+                    navController.navigate(Routes.Run) {
+                        popUpTo(Routes.Auth) {
+                            inclusive = true
+                        }
+                    }
+                },
+                onSignUpClick = {
+                    navController.navigate(Routes.Register) {
+                        popUpTo(Routes.Login) {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                }
+            )
         }
     }
 }
