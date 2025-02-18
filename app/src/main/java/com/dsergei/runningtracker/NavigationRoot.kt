@@ -1,6 +1,9 @@
 package com.dsergei.runningtracker
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -21,6 +24,7 @@ fun NavigationRoot(
         startDestination = if (isLoggedIn) Routes.Run else Routes.Auth
     ) {
         authGraph(navController)
+        runGraph(navController)
     }
 }
 
@@ -73,6 +77,22 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
                     }
                 }
             )
+        }
+    }
+}
+
+private fun NavGraphBuilder.runGraph(
+    navController: NavHostController,
+) {
+    navigation<Routes.Run>(
+        startDestination = Routes.RunOverview,
+    ) {
+        composable<Routes.RunOverview> {
+            Box(
+                contentAlignment = Alignment.Center
+            ) {
+                Text("runGraph")
+            }
         }
     }
 }
