@@ -1,6 +1,9 @@
 package com.dsergei.runningtracker
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -54,7 +57,9 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
             )
         }
         composable<Routes.Login> {
-
+            Box(contentAlignment = Alignment.Center) {
+                Text("LOGIN")
+            }
         }
     }
 }
