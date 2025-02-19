@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,10 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -87,57 +88,63 @@ private fun LoginScreen(
     onAction: (LoginAction) -> Unit
 ) {
     GradientBackground {
-        Column(
+        Box(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
                 .fillMaxSize()
                 .padding(horizontal = 16.dp)
                 .padding(vertical = 32.dp)
-                .padding(top = 16.dp)
         ) {
-            Text(
-                text = stringResource(id = R.string.hi_there),
-                fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.headlineMedium
-            )
-            Text(
-                text = stringResource(id = R.string.runique_welcome_text),
-                fontSize = 12.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp)
+                    .padding(vertical = 32.dp)
+                    .padding(top = 16.dp)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.hi_there),
+                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.headlineMedium
+                )
+                Text(
+                    text = stringResource(id = R.string.runique_welcome_text),
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
 
-            Spacer(modifier = Modifier.height(48.dp))
+                Spacer(modifier = Modifier.height(48.dp))
 
-            RuniqueTextField(
-                state = state.email,
-                startIcon = EmailIcon,
-                endIcon = null,
-                keyboardType = KeyboardType.Email,
-                hint = stringResource(id = R.string.example_email),
-                title = stringResource(id = R.string.email),
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            RuniquePasswordTextField(
-                state = state.password,
-                isPasswordVisible = state.isPasswordVisible,
-                onTogglePasswordVisibility = {
-                    onAction(LoginAction.OnTogglePasswordVisibility)
-                },
-                hint = stringResource(id = R.string.password),
-                title = stringResource(id = R.string.password),
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(32.dp))
-            RuniqueActionButton(
-                text = stringResource(id = R.string.login),
-                isLoading = state.isLoggingIn,
-                enabled = state.canLogin && !state.isLoggingIn,
-                onClick = {
-                    onAction(LoginAction.OnLoginClick)
-                },
-            )
-
+                RuniqueTextField(
+                    state = state.email,
+                    startIcon = EmailIcon,
+                    endIcon = null,
+                    keyboardType = KeyboardType.Email,
+                    hint = stringResource(id = R.string.example_email),
+                    title = stringResource(id = R.string.email),
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                RuniquePasswordTextField(
+                    state = state.password,
+                    isPasswordVisible = state.isPasswordVisible,
+                    onTogglePasswordVisibility = {
+                        onAction(LoginAction.OnTogglePasswordVisibility)
+                    },
+                    hint = stringResource(id = R.string.password),
+                    title = stringResource(id = R.string.password),
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.height(32.dp))
+                RuniqueActionButton(
+                    text = stringResource(id = R.string.login),
+                    isLoading = state.isLoggingIn,
+                    enabled = state.canLogin && !state.isLoggingIn,
+                    onClick = {
+                        onAction(LoginAction.OnLoginClick)
+                    },
+                )
+            }
             val annotatedString = buildAnnotatedString {
                 withStyle(
                     style = SpanStyle(
@@ -146,10 +153,7 @@ private fun LoginScreen(
                     )
                 ) {
                     append(stringResource(id = R.string.dont_have_an_account) + " ")
-                    pushStringAnnotation(
-                        tag = "clickable_text",
-                        annotation = stringResource(id = R.string.sign_up)
-                    )
+
                     withStyle(
                         style = SpanStyle(
                             fontWeight = FontWeight.SemiBold,
@@ -157,29 +161,20 @@ private fun LoginScreen(
                             fontFamily = Poppins
                         )
                     ) {
-                        append(stringResource(id = R.string.sign_up))
+                        withLink(
+                            link = LinkAnnotation.Clickable("sign_up") {
+                                onAction(LoginAction.OnRegisterClick)
+                            }
+                        ) {
+                            append(stringResource(id = R.string.sign_up))
+                        }
                     }
                 }
             }
-            Box(
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .weight(1f),
-                contentAlignment = Alignment.BottomCenter
-            ) {
-                ClickableText(
-                    text = annotatedString,
-                    onClick = { offset ->
-                        annotatedString.getStringAnnotations(
-                            tag = "clickable_text",
-                            start = offset,
-                            end = offset
-                        ).firstOrNull()?.let {
-                            onAction(LoginAction.OnRegisterClick)
-                        }
-                    }
-                )
-            }
+            Text(
+                text = annotatedString,
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
         }
     }
 }

@@ -17,7 +17,6 @@ import com.dsergei.auth.presentation.register.RegisterScreenRoot
 fun NavigationRoot(
     navController: NavHostController,
     isLoggedIn: Boolean,
-    onAnalyticsClick: () -> Unit
 ) {
     NavHost(
         navController = navController,
