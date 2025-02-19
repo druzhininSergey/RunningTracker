@@ -1,9 +1,7 @@
 package com.dsergei.runningtracker
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -12,6 +10,7 @@ import androidx.navigation.navigation
 import com.dsergei.auth.presentation.intro.IntroScreenRoot
 import com.dsergei.auth.presentation.login.LoginScreenRoot
 import com.dsergei.auth.presentation.register.RegisterScreenRoot
+import com.dsergei.run.presentation.RunOverviewScreenRoot
 
 @Composable
 fun NavigationRoot(
@@ -87,11 +86,15 @@ private fun NavGraphBuilder.runGraph(
         startDestination = Routes.RunOverview,
     ) {
         composable<Routes.RunOverview> {
-            Box(
-                contentAlignment = Alignment.Center
-            ) {
-                Text("runGraph")
-            }
+//            Text("RunOverview")
+            RunOverviewScreenRoot(
+                onStartRunClick = {},
+                onLogoutClick = {},
+                onAnalyticsClick = {},
+            )
+        }
+        composable<Routes.ActiveRun> {
+            Text("ActiveRun")
         }
     }
 }
