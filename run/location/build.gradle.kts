@@ -16,9 +16,4 @@ dependencies {
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.google.android.gms.play.services.location)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 }
