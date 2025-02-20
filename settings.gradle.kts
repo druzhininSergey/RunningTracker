@@ -20,6 +20,8 @@ dependencyResolutionManagement {
     }
 }
 
+gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:convention:testClasses"))
+
 rootProject.name = "RunningTracker"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
@@ -33,6 +35,6 @@ include(":core:data")
 include(":core:database")
 include(":run:data")
 include(":run:domain")
-include(":run:presentation")
 include(":run:location")
 include(":run:network")
+include(":run:presentation")
