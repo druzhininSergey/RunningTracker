@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalCoroutinesApi::class)
-
 package com.dsergei.run.domain
 
 import com.dsergei.core.domain.Timer
@@ -22,6 +20,7 @@ import kotlin.math.roundToInt
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class RunningTracker(
     private val locationObserver: LocationObserver,
     applicationScope: CoroutineScope,
@@ -29,9 +28,7 @@ class RunningTracker(
     private val _runData = MutableStateFlow(RunData())
     val runData = _runData.asStateFlow()
 
-    private val _isTracking = MutableStateFlow(false)
-    val isTracking = _isTracking.asStateFlow()
-
+    private val isTracking = MutableStateFlow(false)
     private val isObservingLocation = MutableStateFlow(false)
 
     private val _elapsedTime = MutableStateFlow(Duration.ZERO)
@@ -50,21 +47,7 @@ class RunningTracker(
         )
 
     init {
-
-        _isTracking
-            .onEach { isTracking ->
-                if (!isTracking) {
-                    val newList = buildList {
-                        addAll(runData.value.locations)
-                        add(emptyList<LocationTimestamp>())
-                    }.toList()
-                    _runData.update {
-                        it.copy(
-                            locations = newList
-                        )
-                    }
-                }
-            }
+        isTracking
             .flatMapLatest { isTracking ->
                 if (isTracking) {
                     Timer.timeAndEmit()
@@ -77,7 +60,7 @@ class RunningTracker(
 
         currentLocation
             .filterNotNull()
-            .combineTransform(_isTracking) { location, isTracking ->
+            .combineTransform(isTracking) { location, isTracking ->
                 if (isTracking) {
                     emit(location)
                 }
@@ -111,7 +94,7 @@ class RunningTracker(
                     RunData(
                         distanceMeters = distanceMeters,
                         pace = avgSecondsPerKm.seconds,
-                        locations = newLocationsList,
+                        locations = newLocationsList
                     )
                 }
             }
@@ -119,7 +102,7 @@ class RunningTracker(
     }
 
     fun setIsTracking(isTracking: Boolean) {
-        this._isTracking.value = isTracking
+        this.isTracking.value = isTracking
     }
 
     fun startObservingLocation() {
