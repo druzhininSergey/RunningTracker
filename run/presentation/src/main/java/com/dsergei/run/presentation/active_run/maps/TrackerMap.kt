@@ -1,4 +1,4 @@
-package com.dsergei.run.presentation.active_run.components
+package com.dsergei.run.presentation.active_run.maps
 
 import android.graphics.Bitmap
 import androidx.compose.animation.core.animateFloatAsState
@@ -85,7 +85,7 @@ fun TrackerMap(
             zoomControlsEnabled = false
         ),
     ) {
-
+        RuniquePolylines(locations)
 
         if (!isRunFinished && currentLocation != null) {
             MarkerComposable(
