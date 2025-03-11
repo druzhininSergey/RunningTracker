@@ -33,7 +33,7 @@ import com.dsergei.core.presentation.desingsystem.components.RuniqueScaffold
 import com.dsergei.core.presentation.desingsystem.components.RuniqueToolbar
 import com.dsergei.run.presentation.R
 import com.dsergei.run.presentation.active_run.components.RunDataCard
-import com.dsergei.run.presentation.active_run.components.TrackerMap
+import com.dsergei.run.presentation.active_run.maps.TrackerMap
 import com.dsergei.run.presentation.util.hasLocationPermission
 import com.dsergei.run.presentation.util.hasNotificationPermission
 import com.dsergei.run.presentation.util.shouldShowLocationPermissionRationale
