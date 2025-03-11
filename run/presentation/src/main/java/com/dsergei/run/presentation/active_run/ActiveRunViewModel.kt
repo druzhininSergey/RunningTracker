@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
-import timber.log.Timber
 
 class ActiveRunViewModel(
     private val runningTracker: RunningTracker
@@ -86,9 +85,11 @@ class ActiveRunViewModel(
             ActiveRunAction.OnResumeRunClick -> {
                 state = state.copy(shouldTrack = true)
             }
+
             ActiveRunAction.OnBackClick -> {
                 state = state.copy(shouldTrack = false)
             }
+
             ActiveRunAction.OnToggleRunClick -> {
                 state = state.copy(
                     hasStartedRunning = true,
@@ -117,5 +118,4 @@ class ActiveRunViewModel(
             }
         }
     }
-
 }

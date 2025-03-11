@@ -9,9 +9,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -29,6 +33,7 @@ import com.dsergei.core.presentation.desingsystem.components.RuniqueScaffold
 import com.dsergei.core.presentation.desingsystem.components.RuniqueToolbar
 import com.dsergei.run.presentation.R
 import com.dsergei.run.presentation.active_run.components.RunDataCard
+import com.dsergei.run.presentation.active_run.components.TrackerMap
 import com.dsergei.run.presentation.util.hasLocationPermission
 import com.dsergei.run.presentation.util.hasNotificationPermission
 import com.dsergei.run.presentation.util.shouldShowLocationPermissionRationale
@@ -41,7 +46,7 @@ fun ActiveRunScreenRoot(
 ) {
     ActiveRunScreen(
         state = viewModel.state,
-        onAction = {}
+        onAction = viewModel::onAction
     )
 }
 
@@ -132,14 +137,28 @@ private fun ActiveRunScreen(
             )
         }
     ) { padding ->
-        RunDataCard(
-            elapsedTime = state.elapsedTime,
-            runData = state.runData,
+        Box(
             modifier = Modifier
-                .padding(16.dp)
-                .padding(padding)
-                .fillMaxWidth()
-        )
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.surface)
+        ) {
+            TrackerMap(
+                isRunFinished = state.isRunFinished,
+                currentLocation = state.currentLocation,
+                locations = state.runData.locations,
+                onSnapshot = {},
+                modifier = Modifier
+                    .fillMaxSize()
+            )
+            RunDataCard(
+                elapsedTime = state.elapsedTime,
+                runData = state.runData,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .padding(padding)
+                    .fillMaxWidth()
+            )
+        }
     }
 
     if (state.showLocationRationale || state.showNotificationRationale) {
