@@ -4,6 +4,7 @@ import android.app.Application
 import com.dsergei.auth.data.di.authDataModule
 import com.dsergei.auth.presentation.di.authViewModelModule
 import com.dsergei.core.data.di.coreDataModule
+import com.dsergei.core.database.di.databaseModule
 import com.dsergei.run.location.di.locationModule
 import com.dsergei.run.presentation.di.runPresentationModule
 import com.dsergei.runningtracker.di.appModule
@@ -34,6 +35,7 @@ class RunningTrackerApp : Application() {
                 coreDataModule,
                 runPresentationModule,
                 locationModule,
+                databaseModule,
 
             )
         }
