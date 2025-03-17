@@ -6,6 +6,7 @@ import com.dsergei.auth.presentation.di.authViewModelModule
 import com.dsergei.core.data.di.coreDataModule
 import com.dsergei.core.database.di.databaseModule
 import com.dsergei.run.location.di.locationModule
+import com.dsergei.run.network.di.networkModule
 import com.dsergei.run.presentation.di.runPresentationModule
 import com.dsergei.runningtracker.di.appModule
 import kotlinx.coroutines.CoroutineScope
@@ -36,8 +37,9 @@ class RunningTrackerApp : Application() {
                 runPresentationModule,
                 locationModule,
                 databaseModule,
+                networkModule,
 
-            )
+                )
         }
     }
 }
