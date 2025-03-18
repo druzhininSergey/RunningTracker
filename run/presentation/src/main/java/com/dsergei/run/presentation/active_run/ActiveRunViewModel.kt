@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dsergei.core.domain.location.Location
 import com.dsergei.core.domain.run.Run
+import com.dsergei.core.domain.run.RunRepository
+import com.dsergei.core.domain.util.Result
+import com.dsergei.core.presentation.ui.asUiText
 import com.dsergei.run.domain.LocationDataCalculator
 import com.dsergei.run.domain.RunningTracker
 import com.dsergei.run.presentation.active_run.service.ActiveRunService
@@ -24,13 +27,16 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 
 class ActiveRunViewModel(
-    private val runningTracker: RunningTracker
+    private val runningTracker: RunningTracker,
+    private val runRepository: RunRepository
 ) : ViewModel() {
 
-    var state by mutableStateOf(ActiveRunState(
-        shouldTrack = ActiveRunService.isServiceActive && runningTracker.isTracking.value,
-        hasStartedRunning = ActiveRunService.isServiceActive
-    ))
+    var state by mutableStateOf(
+        ActiveRunState(
+            shouldTrack = ActiveRunService.isServiceActive && runningTracker.isTracking.value,
+            hasStartedRunning = ActiveRunService.isServiceActive
+        )
+    )
         private set
 
     private val eventChannel = Channel<ActiveRunEvent>()
@@ -50,7 +56,7 @@ class ActiveRunViewModel(
     init {
         hasLocationPermission
             .onEach { hasPermission ->
-                if(hasPermission) {
+                if (hasPermission) {
                     runningTracker.startObservingLocation()
                 } else {
                     runningTracker.stopObservingLocation()
@@ -87,51 +93,59 @@ class ActiveRunViewModel(
     }
 
     fun onAction(action: ActiveRunAction) {
-        when(action) {
+        when (action) {
             ActiveRunAction.OnFinishRunClick -> {
                 state = state.copy(
                     isRunFinished = true,
                     isSavingRun = true
                 )
             }
+
             ActiveRunAction.OnResumeRunClick -> {
                 state = state.copy(shouldTrack = true)
             }
+
             ActiveRunAction.OnBackClick -> {
                 state = state.copy(shouldTrack = false)
             }
+
             ActiveRunAction.OnToggleRunClick -> {
                 state = state.copy(
                     hasStartedRunning = true,
                     shouldTrack = !state.shouldTrack
                 )
             }
+
             is ActiveRunAction.SubmitLocationPermissionInfo -> {
                 hasLocationPermission.value = action.acceptedLocationPermission
                 state = state.copy(
                     showLocationRationale = action.showLocationRationale
                 )
             }
+
             is ActiveRunAction.SubmitNotificationPermissionInfo -> {
                 state = state.copy(
                     showNotificationRationale = action.showNotificationPermissionRationale
                 )
             }
+
             is ActiveRunAction.DismissRationaleDialog -> {
                 state = state.copy(
                     showNotificationRationale = false,
                     showLocationRationale = false
                 )
             }
+
             is ActiveRunAction.OnRunProcessed -> {
                 finishRun(action.mapPictureBytes)
             }
+
         }
     }
 
     private fun finishRun(mapPictureBytes: ByteArray) {
         val locations = state.runData.locations
-        if(locations.isEmpty() || locations.first().size <= 1) {
+        if (locations.isEmpty() || locations.first().size <= 1) {
             state = state.copy(isSavingRun = false)
             return
         }
@@ -149,16 +163,25 @@ class ActiveRunViewModel(
                 mapPictureUrl = null
             )
 
-            // Save run in repository
-
             runningTracker.finishRun()
+
+            when (val result = runRepository.upsertRun(run, mapPictureBytes)) {
+                is Result.Error -> {
+                    eventChannel.send(ActiveRunEvent.Error(result.error.asUiText()))
+                }
+
+                is Result.Success -> {
+                    eventChannel.send(ActiveRunEvent.RunSaved)
+                }
+            }
+
             state = state.copy(isSavingRun = false)
         }
     }
 
     override fun onCleared() {
         super.onCleared()
-        if(!ActiveRunService.isServiceActive) {
+        if (!ActiveRunService.isServiceActive) {
             runningTracker.stopObservingLocation()
         }
     }
