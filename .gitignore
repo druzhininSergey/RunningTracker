@@ -14,3 +14,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+/core/database/schemas/com.dsergei.core.database.RunDatabase/1.json

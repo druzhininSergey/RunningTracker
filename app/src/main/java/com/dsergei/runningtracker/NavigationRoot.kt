@@ -91,8 +91,6 @@ private fun NavGraphBuilder.runGraph(
         composable<Routes.RunOverview> {
             RunOverviewScreenRoot(
                 onStartRunClick = { navController.navigate(Routes.ActiveRun) },
-                onLogoutClick = {},
-                onAnalyticsClick = {},
             )
         }
         composable<Routes.ActiveRun>(
@@ -104,6 +102,12 @@ private fun NavGraphBuilder.runGraph(
         ) {
             val context = LocalContext.current
             ActiveRunScreenRoot(
+                onBack = {
+                    navController.navigateUp()
+                },
+                onFinish = {
+                    navController.navigateUp()
+                },
                 onServiceToggle = { shouldServiceRun ->
                     if (shouldServiceRun) {
                         context.startService(
