@@ -25,12 +25,13 @@ class RunOverviewViewModel(
         }.launchIn(viewModelScope)
 
         viewModelScope.launch {
+            runRepository.syncPendingRuns()
             runRepository.fetchRuns()
         }
     }
 
     fun onAction(action: RunOverviewAction) {
-        when (action) {
+        when(action) {
             RunOverviewAction.OnLogoutClick -> Unit
             RunOverviewAction.OnStartClick -> Unit
             is RunOverviewAction.DeleteRun -> {
@@ -38,7 +39,6 @@ class RunOverviewViewModel(
                     runRepository.deleteRun(action.runUi.id)
                 }
             }
-
             else -> Unit
         }
     }
