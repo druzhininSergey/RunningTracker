@@ -3,6 +3,7 @@ package com.dsergei.core.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.dsergei.core.database.dao.RunDao
+import com.dsergei.core.database.dao.RunPendingSyncDao
 import com.dsergei.core.database.entity.RunEntity
 
 @Database(
@@ -13,4 +14,5 @@ import com.dsergei.core.database.entity.RunEntity
 )
 abstract class RunDatabase : RoomDatabase() {
     abstract val runDao: RunDao
+    abstract val runPendingSyncDao: RunPendingSyncDao
 }
