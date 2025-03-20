@@ -33,6 +33,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun RunOverviewScreenRoot(
     onStartRunClick: () -> Unit,
+    onLogoutClick: () -> Unit,
     viewModel: RunOverviewViewModel = koinViewModel(),
 ) {
     RunOverviewScreen(
@@ -40,6 +41,7 @@ fun RunOverviewScreenRoot(
         onAction = { action ->
             when (action) {
                 RunOverviewAction.OnStartClick -> onStartRunClick()
+                RunOverviewAction.OnLogoutClick -> onLogoutClick()
                 else -> Unit
             }
             viewModel.onAction(action)
@@ -115,7 +117,8 @@ private fun RunOverviewScreen(
                     onDeleteClick = {
                         onAction(RunOverviewAction.DeleteRun(it))
                     },
-                    modifier = Modifier.animateItem(fadeInSpec = null, fadeOutSpec = null)
+                    modifier = Modifier
+                        .animateItem()
                 )
             }
         }
