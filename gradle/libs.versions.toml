@@ -133,6 +133,7 @@ runningtracker-android-library = { id = "runningtracker.android.library", versio
 runningtracker-android-library-compose = { id = "runningtracker.android.library.compose", version = "unspecified" }
 runningtracker-android-feature-ui = { id = "runningtracker.android.feature.ui", version = "unspecified" }
 runningtracker-android-room = { id = "runningtracker.android.room", version = "unspecified" }
+runningtracker-android-dynamic-feature = { id = "runningtracker.android.dynamic.feature", version = "unspecified" }
 runningtracker-jvm-library = { id = "runningtracker.jvm.library", version = "unspecified" }
 runningtracker-jvm-ktor = { id = "runningtracker.jvm.ktor", version = "unspecified" }
 
