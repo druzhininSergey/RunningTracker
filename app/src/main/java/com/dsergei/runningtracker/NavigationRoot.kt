@@ -91,6 +91,13 @@ private fun NavGraphBuilder.runGraph(
         composable<Routes.RunOverview> {
             RunOverviewScreenRoot(
                 onStartRunClick = { navController.navigate(Routes.ActiveRun) },
+                onLogoutClick = {
+                    navController.navigate(Routes.Auth) {
+                        popUpTo(Routes.Run) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
         composable<Routes.ActiveRun>(
