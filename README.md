@@ -47,16 +47,17 @@ The main application module that coordinates all other modules.
 
 ## Screenshots
 
-<p style="text-align: center;">
-  <img src="runningtracker1.jpg" alt="Login Screen" width="1220"/>
-  <img src="runningtracker2.jpg" alt="Run Tracking" width="1220"/>
-  <img src="runningtracker3.jpg" alt="Statistics" width="1220"/>
-</p>
+<table>
+  <tr>
+    <td><img src="runningtracker1.jpg" width="250" alt="Welcome Screen"></td>
+    <td><img src="runningtracker2.jpg" width="250" alt="Login Screen"></td>
+    <td><img src="runningtracker3.jpg" width="250" alt="SignUp Screen"></td>
+  </tr>
+</table>
 
-<p style="text-align: center;">
-  <img src="runningtracker4.jpg" alt="Run History" width="1220"/>
-  <img src="runningtracker5.jpg" alt="Analytics Dashboard" width="1220"/>
-</p>
-
-[Screenshots will be added here]
-
+<table>
+  <tr>
+    <td><img src="runningtracker4.jpg" width="250" alt="Active Run Screen"></td>
+    <td><img src="runningtracker5.jpg" width="250" alt="Run Overview Screen"></td>
+  </tr>
+</table>
