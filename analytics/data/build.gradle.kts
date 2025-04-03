@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.runningtracker.android.library)
+    alias(libs.plugins.runningtracker.android.room)
 }
 
 android {
