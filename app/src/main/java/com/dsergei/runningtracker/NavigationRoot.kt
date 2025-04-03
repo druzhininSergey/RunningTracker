@@ -19,13 +19,14 @@ import com.dsergei.run.presentation.run_overview.RunOverviewScreenRoot
 fun NavigationRoot(
     navController: NavHostController,
     isLoggedIn: Boolean,
+    onAnalyticsClick: () -> Unit
 ) {
     NavHost(
         navController = navController,
         startDestination = if (isLoggedIn) Routes.Run else Routes.Auth
     ) {
         authGraph(navController)
-        runGraph(navController)
+        runGraph(navController, onAnalyticsClick)
     }
 }
 
@@ -84,6 +85,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
 
 private fun NavGraphBuilder.runGraph(
     navController: NavHostController,
+    onAnalyticsClick: () -> Unit,
 ) {
     navigation<Routes.Run>(
         startDestination = Routes.RunOverview,
@@ -91,6 +93,7 @@ private fun NavGraphBuilder.runGraph(
         composable<Routes.RunOverview> {
             RunOverviewScreenRoot(
                 onStartRunClick = { navController.navigate(Routes.ActiveRun) },
+                onAnalyticsClick = onAnalyticsClick,
                 onLogoutClick = {
                     navController.navigate(Routes.Auth) {
                         popUpTo(Routes.Run) {

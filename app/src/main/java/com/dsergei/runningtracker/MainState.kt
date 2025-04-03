@@ -5,4 +5,3 @@ data class MainState(
     val isCheckingAuth: Boolean = false,
     val showAnalyticsInstallDialog: Boolean = false
 )
-
